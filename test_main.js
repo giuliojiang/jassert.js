@@ -6,24 +6,22 @@ jassert.verbose = false;
 async.waterfall([
     function(callback) {
         try {
-            var stats = {
-                "pass": 0,
-                "fail": 0
-            };
+
+            var stats = jassert.stats;
             
             var t = true;
             var f = false;
             
-            if (!jassert.all_tests_passed(stats)) {
+            if (!jassert.all_tests_passed()) {
                 throw new Error("tests should all be fine");
             }
             
-            jassert.assert_true(t, stats);
+            jassert.assert_true(t);
             if (stats["pass"] != 1) {
                 throw new Error("expected a pass");
             }
             
-            jassert.assert_true(t, stats);
+            jassert.assert_true(t);
             if (stats["pass"] != 2) {
                 throw new Error("expected a pass");
             }
@@ -31,7 +29,7 @@ async.waterfall([
                 throw new Error("expected no fails");
             }
             
-            jassert.assert_true(f, stats);
+            jassert.assert_true(f);
             if (stats["pass"] != 2) {
                 throw new Error("expected no additional pass");
             }
@@ -46,7 +44,7 @@ async.waterfall([
             var s2 = "hi";
             var s3 = "hi ";
             
-            jassert.assert_equal(o, o, stats);
+            jassert.assert_equal(o, o);
             if (stats["pass"] != 3) {
                 throw new Error("expected 3 pass");
             }
@@ -54,7 +52,7 @@ async.waterfall([
                 throw new Error("expected 1 fail");
             }
             
-            jassert.assert_equal(o, s, stats);
+            jassert.assert_equal(o, s);
             if (stats["pass"] != 3) {
                 throw new Error("expected 3 pass");
             }
@@ -62,7 +60,7 @@ async.waterfall([
                 throw new Error("expected 2 fail");
             }
             
-            jassert.assert_equal(o, o2, stats);
+            jassert.assert_equal(o, o2);
             if (stats["pass"] != 4) {
                 throw new Error("expected o and o2 to be equal");
             }
@@ -70,7 +68,7 @@ async.waterfall([
                 throw new Error("expected 2 fail");
             }
             
-            jassert.assert_equal(s, s2, stats);
+            jassert.assert_equal(s, s2);
             if (stats["pass"] != 5) {
                 throw new Error("expected s and s2 to be equal");
             }
@@ -78,7 +76,7 @@ async.waterfall([
                 throw new Error("expected 2 fail");
             }
             
-            jassert.assert_equal(s, s3, stats);
+            jassert.assert_equal(s, s3);
             if (stats["pass"] != 5) {
                 throw new Error("expected 5 pass");
             }
@@ -86,7 +84,7 @@ async.waterfall([
                 throw new Error("expected s and s3 to be different");
             }
             
-            jassert.assert_equal(o, o3, stats);
+            jassert.assert_equal(o, o3);
             if (stats["pass"] != 5) {
                 throw new Error("expected 5 pass");
             }
@@ -94,11 +92,11 @@ async.waterfall([
                 throw new Error("expected o and o3 to be different");
             }
             
-            if (jassert.all_tests_passed(stats)) {
+            if (jassert.all_tests_passed()) {
                 throw new Error("there should be failed tests");
             }
             
-            if (jassert.format_stats(stats) != "PASSED 5 tests\nFAILED 4 tests\n") {
+            if (jassert.format() != "PASSED 5 tests\nFAILED 4 tests\n") {
                 throw new Error("wrong string formatting");
             }
             

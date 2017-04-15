@@ -6,7 +6,18 @@ var println = function(m) {
     }
 };
 
-module.exports.assert_true = function(term, stats) {
+var stats = null;
+
+module.exports.reset = function() {
+    stats = {
+        "pass": 0,
+        "fail": 0
+    };
+    module.exports.stats = stats;
+};
+module.exports.reset();
+
+module.exports.assert_true = function(term) {
     if (!term) {
         stats["fail"] += 1;
         println(new Error("Unit test assert_true failure"));
@@ -15,7 +26,7 @@ module.exports.assert_true = function(term, stats) {
     }
 };
 
-module.exports.assert_equal = function(expected, actual, stats) {
+module.exports.assert_equal = function(expected, actual) {
     var res = false;
     var expectedS = expected;
     var actualS = actual;
@@ -39,7 +50,7 @@ module.exports.assert_equal = function(expected, actual, stats) {
 };
 
 // return: a string containing information about tests run
-module.exports.format_stats = function(stats) {
+module.exports.format = function() {
     var s = "";
     s += "PASSED "+ stats["pass"] +" tests\n";
     if (stats["fail"] > 0) {
@@ -52,6 +63,6 @@ module.exports.format_stats = function(stats) {
 }
 
 // return: true iff no tests failed
-module.exports.all_tests_passed = function(stats) {
+module.exports.all_tests_passed = function() {
     return stats["fail"] == 0;
 }
