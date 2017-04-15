@@ -1,0 +1,22 @@
+{
+  "name": "jassert.js",
+  "version": "0.0.1",
+  "description": "Simple Node.js assert library compatible with my personal testsuites",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test_main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/giuliojiang/jassert.js.git"
+  },
+  "author": "Giulio Jiang",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/giuliojiang/jassert.js/issues"
+  },
+  "homepage": "https://github.com/giuliojiang/jassert.js#readme",
+  "dependencies": {
+    "async": "^2.3.0"
+  }
+}
