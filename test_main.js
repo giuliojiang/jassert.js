@@ -1,6 +1,7 @@
 var async = require("async");
 
 var jassert = require(__dirname + "/index.js");
+jassert.verbose = false;
 
 async.waterfall([
     function(callback) {
@@ -12,6 +13,10 @@ async.waterfall([
             
             var t = true;
             var f = false;
+            
+            if (!jassert.all_tests_passed(stats)) {
+                throw new Error("tests should all be fine");
+            }
             
             jassert.assert_true(t, stats);
             if (stats["pass"] != 1) {
@@ -35,8 +40,9 @@ async.waterfall([
             }
             
             var o = {hello: "world"};
-            var s = "hi";
             var o2 = {hello: "world"};
+            var o3 = {hello: "NOTworld"};
+            var s = "hi";
             var s2 = "hi";
             var s3 = "hi ";
             
@@ -78,6 +84,22 @@ async.waterfall([
             }
             if (stats["fail"] != 3) {
                 throw new Error("expected s and s3 to be different");
+            }
+            
+            jassert.assert_equal(o, o3, stats);
+            if (stats["pass"] != 5) {
+                throw new Error("expected 5 pass");
+            }
+            if (stats["fail"] != 4) {
+                throw new Error("expected o and o3 to be different");
+            }
+            
+            if (jassert.all_tests_passed(stats)) {
+                throw new Error("there should be failed tests");
+            }
+            
+            if (jassert.format_stats(stats) != "PASSED 5 tests\nFAILED 4 tests\n") {
+                throw new Error("wrong string formatting");
             }
             
         } catch (err) {
