@@ -29,13 +29,7 @@ module.exports.assert_true = function(term) {
 };
 
 module.exports.assert_equal = function(expected, actual) {
-    
-    // Arrays are handled by the deep equal method
-    if (expected instanceof Array || actual instanceof Array) {
-        module.exports.assert_equal_deep(expected, actual);
-        return;
-    }
-    
+
     var res = false;
     var expectedS = expected;
     var actualS = actual;
@@ -44,18 +38,23 @@ module.exports.assert_equal = function(expected, actual) {
         var expectedS = JSON.stringify(expected, Object.keys(expected).sort());
         var actualS = JSON.stringify(actual, Object.keys(actual).sort());
         res = expectedS === actualS;
+        
+        if (res) {
+            stats["pass"] += 1;
+        } else {
+            stats["fail"] += 1;
+            println("\nExpected: " + expectedS);
+            println("Actual: " + actualS);
+            println(new Error("Unit test assert_equal failure"));
+        }
+        return;
+        
     } else {
-        res = expected == actual;
+        // Use deep equal to handle all other cases
+        module.exports.assert_equal_deep(expected, actual);
+        return;
     }
-    
-    if (res) {
-        stats["pass"] += 1;
-    } else {
-        stats["fail"] += 1;
-        println("\nExpected: " + expectedS);
-        println("Actual: " + actualS);
-        println(new Error("Unit test assert_equal failure"));
-    }
+
 };
 
 // Deep equal is handled by the `assert` library

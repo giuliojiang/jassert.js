@@ -153,6 +153,27 @@ async.waterfall([
                 throw new Error("fail check");
             }
             
+            // Array tests
+            var array_1 = [1,2,3];
+            var array_2 = [1,2,3];
+            var array_3 = [1,1,3];
+            
+            jassert.assert_equal(array_1, array_2);
+            if (stats["pass"] != 8) {
+                throw new Error("pass check");
+            }
+            if (stats["fail"] != 5) {
+                throw new Error("fail check");
+            }
+            
+            jassert.assert_equal(array_1, array_3);
+            if (stats["pass"] != 8) {
+                throw new Error("pass check");
+            }
+            if (stats["fail"] != 6) {
+                throw new Error("fail check");
+            }
+            
         } catch (err) {
             callback(err);
             return;
