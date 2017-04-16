@@ -174,6 +174,18 @@ async.waterfall([
                 throw new Error("fail check");
             }
             
+            // Resetting
+            
+            jassert.reset();
+            
+            if (!jassert.all_tests_passed()) {
+                throw new Error("no tests recorded now");
+            }
+            
+            if (jassert.format() != "PASSED 0 tests\nALL TESTS PASSED\n") {
+                throw new Error("wrong string formatting");
+            }
+            
         } catch (err) {
             callback(err);
             return;
