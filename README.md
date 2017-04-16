@@ -31,7 +31,8 @@ jassert.assert_true(true);
 
 Asserting equality
 ```
-jassert.assert_equal({hello: "world"}, {hello: "world"});
+jassert.assert_equal({hello: "world"}, {hello: "world"}); // fails
+jassert.assert_equal_deep({hello: "world"}, {hello: "world"}); // passes
 ```
 
 Getting result report
@@ -59,9 +60,3 @@ Disable automatic stacktrace for failed tests
 ```
 jassert.verbose = false;
 ```
-
-# Object comparison
-
-`jassert.js` compares objects in a semi-deep way:
-
-all object keys in the first level will be compared in an ordered way, however it ignores the key ordering of all subsequent levels. Use `jassert.assert_equal_deep` if necessary.

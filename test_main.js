@@ -65,34 +65,34 @@ async.waterfall([
             }
             
             jassert.assert_equal(o, o2);
-            if (stats["pass"] != 4) {
+            if (stats["pass"] != 3) {
                 throw new Error("expected o and o2 to be equal");
             }
-            if (stats["fail"] != 2) {
+            if (stats["fail"] != 3) {
                 throw new Error("expected 2 fail");
             }
             
             jassert.assert_equal(s, s2);
-            if (stats["pass"] != 5) {
+            if (stats["pass"] != 4) {
                 throw new Error("expected s and s2 to be equal");
             }
-            if (stats["fail"] != 2) {
+            if (stats["fail"] != 3) {
                 throw new Error("expected 2 fail");
             }
             
             jassert.assert_equal(s, s3);
-            if (stats["pass"] != 5) {
+            if (stats["pass"] != 4) {
                 throw new Error("expected 5 pass");
             }
-            if (stats["fail"] != 3) {
+            if (stats["fail"] != 4) {
                 throw new Error("expected s and s3 to be different");
             }
             
             jassert.assert_equal(o, o3);
-            if (stats["pass"] != 5) {
+            if (stats["pass"] != 4) {
                 throw new Error("expected 5 pass");
             }
-            if (stats["fail"] != 4) {
+            if (stats["fail"] != 5) {
                 throw new Error("expected o and o3 to be different");
             }
             
@@ -102,7 +102,7 @@ async.waterfall([
                 throw new Error("there should be failed tests");
             }
             
-            if (jassert.format() != "PASSED 5 tests\nFAILED 4 tests\n") {
+            if (jassert.format() != "PASSED 4 tests\nFAILED 5 tests\n") {
                 throw new Error("wrong string formatting");
             }
             
@@ -130,26 +130,26 @@ async.waterfall([
             };
             
             jassert.assert_equal_deep(deep_object_1, deep_object_2);
-            if (stats["pass"] != 6) {
+            if (stats["pass"] != 5) {
                 throw new Error("pass check");
             }
-            if (stats["fail"] != 4) {
+            if (stats["fail"] != 5) {
                 throw new Error("fail check");
             }
             
             jassert.assert_equal_deep(deep_object_2, deep_object_1);
-            if (stats["pass"] != 7) {
+            if (stats["pass"] != 6) {
                 throw new Error("pass check");
             }
-            if (stats["fail"] != 4) {
+            if (stats["fail"] != 5) {
                 throw new Error("fail check");
             }
             
             jassert.assert_equal_deep(deep_object_1, deep_object_3);
-            if (stats["pass"] != 7) {
+            if (stats["pass"] != 6) {
                 throw new Error("pass check");
             }
-            if (stats["fail"] != 5) {
+            if (stats["fail"] != 6) {
                 throw new Error("fail check");
             }
             
@@ -158,19 +158,19 @@ async.waterfall([
             var array_2 = [1,2,3];
             var array_3 = [1,1,3];
             
-            jassert.assert_equal(array_1, array_2);
-            if (stats["pass"] != 8) {
-                throw new Error("pass check");
-            }
-            if (stats["fail"] != 5) {
-                throw new Error("fail check");
-            }
-            
-            jassert.assert_equal(array_1, array_3);
-            if (stats["pass"] != 8) {
+            jassert.assert_equal_deep(array_1, array_2);
+            if (stats["pass"] != 7) {
                 throw new Error("pass check");
             }
             if (stats["fail"] != 6) {
+                throw new Error("fail check");
+            }
+            
+            jassert.assert_equal_deep(array_1, array_3);
+            if (stats["pass"] != 7) {
+                throw new Error("pass check");
+            }
+            if (stats["fail"] != 7) {
                 throw new Error("fail check");
             }
             
