@@ -43,8 +43,6 @@ Example output:
 ```
 PASSED 5 tests
 FAILED 4 tests
-
-ALL TESTS PASSED
 ```
 
 Reset state
