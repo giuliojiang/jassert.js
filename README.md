@@ -1,5 +1,10 @@
 # jassert.js
-Simple `Node.js` assert library compatible with my personal testsuites
+
+General purpose `Node.js` assert library.
+
+## Non-throwing
+
+Errors do not cause execution to stop, but are recorded in internal statistics and printed to the console.
 
 # Disambiguation
 

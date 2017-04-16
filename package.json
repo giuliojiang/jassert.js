@@ -1,7 +1,7 @@
 {
   "name": "jassert.js",
-  "version": "0.0.4",
-  "description": "Simple Node.js assert library compatible with my personal testsuites",
+  "version": "0.0.5",
+  "description": "General purpose Node.js assert library.",
   "main": "index.js",
   "scripts": {
     "test": "node test_main.js"
