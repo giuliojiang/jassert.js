@@ -17,6 +17,8 @@ module.exports.reset = function() {
 };
 module.exports.reset();
 
+var assert = require("assert");
+
 module.exports.assert_true = function(term) {
     if (!term) {
         stats["fail"] += 1;
@@ -27,6 +29,13 @@ module.exports.assert_true = function(term) {
 };
 
 module.exports.assert_equal = function(expected, actual) {
+    
+    // Arrays are handled by the deep equal method
+    if (expected instanceof Array || actual instanceof Array) {
+        module.exports.assert_equal_deep(expected, actual);
+        return;
+    }
+    
     var res = false;
     var expectedS = expected;
     var actualS = actual;
@@ -47,6 +56,24 @@ module.exports.assert_equal = function(expected, actual) {
         println("Actual: " + actualS);
         println(new Error("Unit test assert_equal failure"));
     }
+};
+
+// Deep equal is handled by the `assert` library
+module.exports.assert_equal_deep = function(expected, actual) {
+    try {
+        assert.deepEqual(actual, expected);
+    } catch (err) {
+        // Fail
+        stats["fail"] += 1;
+        println("\nExpected: " + JSON.stringify(expected));
+        println("Actual: " + JSON.stringify(actual));
+        println(new Error("Unit test assert_equal_deep failure"));
+        return;
+    }
+    
+    // Pass
+    stats["pass"] += 1;
+    return;
 };
 
 // return: a string containing information about tests run
