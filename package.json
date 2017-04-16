@@ -1,6 +1,6 @@
 {
   "name": "jassert.js",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "General purpose Node.js assert library.",
   "main": "index.js",
   "scripts": {
